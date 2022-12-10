@@ -219,3 +219,34 @@ describe('Move wrong', () => {
         expect(rook.y).toBe(6);
     });
 });
+
+
+describe('Attacking moves', () => {
+    let tiles;
+    beforeEach(() => {
+        const board = new Board();
+        tiles = board.createEmptyBoard();
+    });
+
+    test('Should find one attacking move', () => {
+        const pawn = new Pawn(0, 6, COLOUR.WHITE);
+        const enemyPawn1 = new Pawn(0, 5, COLOUR.BLACK);
+        const enemyPawn2 = new Pawn(1, 5, COLOUR.BLACK);
+
+        tiles[0][6] = pawn;
+        tiles[0][5] = enemyPawn1;
+        tiles[1][5] = enemyPawn2;
+
+        expect(pawn.findAttacks(tiles).length).toBe(1);
+    });
+
+    test('Should find zero attacking moves', () => {
+        const pawn = new Pawn(0, 6, COLOUR.WHITE);
+        const enemyPawn1 = new Pawn(0, 5, COLOUR.BLACK);
+
+        tiles[0][6] = pawn;
+        tiles[0][5] = enemyPawn1;
+
+        expect(pawn.findAttacks(tiles).length).toBe(0);
+    });
+});
