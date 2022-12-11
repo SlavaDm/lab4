@@ -164,19 +164,19 @@ describe('Move', () => {
     });
 
     test('Should move', () => {
-        const rook = new Pawn(1, 6, COLOUR.WHITE);
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
 
         let hasError = false
 
         try {
-            rook.move(1, 5, tiles)
+            pawn.move(1, 5, tiles)
         } catch (e) {
             hasError = true
         }
 
         expect(hasError === false).toBeTruthy();
-        expect(rook.x).toBe(1);
-        expect(rook.y).toBe(5);
+        expect(pawn.x).toBe(1);
+        expect(pawn.y).toBe(5);
     });
 });
 
@@ -188,35 +188,35 @@ describe('Move wrong', () => {
     });
 
     test('Should not move', () => {
-        const rook = new Pawn(1, 6, COLOUR.WHITE);
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
 
         let hasError = false
 
         try {
-            rook.move(1, 8, tiles)
+            pawn.move(1, 8, tiles)
         } catch (e) {
             hasError = true
         }
 
         expect(hasError).toBeTruthy();
-        expect(rook.x).toBe(1);
-        expect(rook.y).toBe(6);
+        expect(pawn.x).toBe(1);
+        expect(pawn.y).toBe(6);
     });
 
     test('Should not move', () => {
-        const rook = new Pawn(1, 6, COLOUR.WHITE);
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
 
         let hasError = false
 
         try {
-            rook.move(8, 6, tiles)
+            pawn.move(8, 6, tiles)
         } catch (e) {
             hasError = true
         }
 
         expect(hasError).toBeTruthy();
-        expect(rook.x).toBe(1);
-        expect(rook.y).toBe(6);
+        expect(pawn.x).toBe(1);
+        expect(pawn.y).toBe(6);
     });
 });
 
