@@ -4,6 +4,101 @@ import { COLOUR } from '../js/constants.js';
 import Pawn from '../js/Pawn.js';
 import Queen from '../js/Queen.js';
 
+describe('Move', () => {
+    let tiles;
+    beforeEach(() => {
+        const board = new Board();
+        tiles = board.createEmptyBoard();
+    });
+
+    test('Should move', () => {
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        let hasError = false
+
+        try {
+            pawn.move(1, 5, tiles)
+        } catch (e) {
+            hasError = true
+        }
+
+        expect(hasError === false).toBeTruthy();
+        expect(pawn.x).toBe(1);
+        expect(pawn.y).toBe(5);
+    });
+});
+
+describe('Move wrong', () => {
+    let tiles;
+    beforeEach(() => {
+        const board = new Board();
+        tiles = board.createEmptyBoard();
+    });
+
+    test('Should not move', () => {
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        let hasError = false
+
+        try {
+            pawn.move(1, 8, tiles)
+        } catch (e) {
+            hasError = true
+        }
+
+        expect(hasError).toBeTruthy();
+        expect(pawn.x).toBe(1);
+        expect(pawn.y).toBe(6);
+    });
+
+    test('Should not move', () => {
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        let hasError = false
+
+        try {
+            pawn.move(8, 6, tiles)
+        } catch (e) {
+            hasError = true
+        }
+
+        expect(hasError).toBeTruthy();
+        expect(pawn.x).toBe(1);
+        expect(pawn.y).toBe(6);
+    });
+});
+
+
+describe('Attacking moves', () => {
+    let tiles;
+    beforeEach(() => {
+        const board = new Board();
+        tiles = board.createEmptyBoard();
+    });
+
+    test('Should find one attacking move', () => {
+        const pawn = new Pawn(0, 6, COLOUR.WHITE);
+        const enemyPawn1 = new Pawn(0, 5, COLOUR.BLACK);
+        const enemyPawn2 = new Pawn(1, 5, COLOUR.BLACK);
+
+        tiles[0][6] = pawn;
+        tiles[0][5] = enemyPawn1;
+        tiles[1][5] = enemyPawn2;
+
+        expect(pawn.findAttacks(tiles).length).toBe(1);
+    });
+
+    test('Should find zero attacking moves', () => {
+        const pawn = new Pawn(0, 6, COLOUR.WHITE);
+        const enemyPawn1 = new Pawn(0, 5, COLOUR.BLACK);
+
+        tiles[0][6] = pawn;
+        tiles[0][5] = enemyPawn1;
+
+        expect(pawn.findAttacks(tiles).length).toBe(0);
+    });
+});
+
 describe('Finding moves', () => {
     let tiles;
     beforeEach(() => {
@@ -156,97 +251,3 @@ describe('Should upgrade to a queen if at the edge of the board', () => {
     });
 });
 
-describe('Move', () => {
-    let tiles;
-    beforeEach(() => {
-        const board = new Board();
-        tiles = board.createEmptyBoard();
-    });
-
-    test('Should move', () => {
-        const pawn = new Pawn(1, 6, COLOUR.WHITE);
-
-        let hasError = false
-
-        try {
-            pawn.move(1, 5, tiles)
-        } catch (e) {
-            hasError = true
-        }
-
-        expect(hasError === false).toBeTruthy();
-        expect(pawn.x).toBe(1);
-        expect(pawn.y).toBe(5);
-    });
-});
-
-describe('Move wrong', () => {
-    let tiles;
-    beforeEach(() => {
-        const board = new Board();
-        tiles = board.createEmptyBoard();
-    });
-
-    test('Should not move', () => {
-        const pawn = new Pawn(1, 6, COLOUR.WHITE);
-
-        let hasError = false
-
-        try {
-            pawn.move(1, 8, tiles)
-        } catch (e) {
-            hasError = true
-        }
-
-        expect(hasError).toBeTruthy();
-        expect(pawn.x).toBe(1);
-        expect(pawn.y).toBe(6);
-    });
-
-    test('Should not move', () => {
-        const pawn = new Pawn(1, 6, COLOUR.WHITE);
-
-        let hasError = false
-
-        try {
-            pawn.move(8, 6, tiles)
-        } catch (e) {
-            hasError = true
-        }
-
-        expect(hasError).toBeTruthy();
-        expect(pawn.x).toBe(1);
-        expect(pawn.y).toBe(6);
-    });
-});
-
-
-describe('Attacking moves', () => {
-    let tiles;
-    beforeEach(() => {
-        const board = new Board();
-        tiles = board.createEmptyBoard();
-    });
-
-    test('Should find one attacking move', () => {
-        const pawn = new Pawn(0, 6, COLOUR.WHITE);
-        const enemyPawn1 = new Pawn(0, 5, COLOUR.BLACK);
-        const enemyPawn2 = new Pawn(1, 5, COLOUR.BLACK);
-
-        tiles[0][6] = pawn;
-        tiles[0][5] = enemyPawn1;
-        tiles[1][5] = enemyPawn2;
-
-        expect(pawn.findAttacks(tiles).length).toBe(1);
-    });
-
-    test('Should find zero attacking moves', () => {
-        const pawn = new Pawn(0, 6, COLOUR.WHITE);
-        const enemyPawn1 = new Pawn(0, 5, COLOUR.BLACK);
-
-        tiles[0][6] = pawn;
-        tiles[0][5] = enemyPawn1;
-
-        expect(pawn.findAttacks(tiles).length).toBe(0);
-    });
-});
