@@ -1,5 +1,5 @@
 export const SIZE = 800;
-export const COLOUR = {
+export const COLOR = {
     BLACK: 'black',
     WHITE: 'white'
 };

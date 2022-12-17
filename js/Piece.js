@@ -1,10 +1,10 @@
 
 import CheckFinder from './CheckFinder.js';
 export default class Piece {
-    constructor(x, y, colour, sprite) {
+    constructor(x, y, color, sprite) {
         this.x = x;
         this.y = y;
-        this.colour = colour;
+        this.color = color;
         this.hasMoved = false;
         this.sprite = sprite;
     }
@@ -35,7 +35,7 @@ export default class Piece {
         let moves = this.findMoves(tiles);
         for (let i = moves.length - 1; i >= 0; i--) {
             const currentMove = moves[i];
-            if (CheckFinder.movePutsPlayerInCheck(this.x, this.y, currentMove.x, currentMove.y, tiles, this.colour)) {
+            if (CheckFinder.movePutsPlayerInCheck(this.x, this.y, currentMove.x, currentMove.y, tiles, this.color)) {
                 moves.splice(i, 1);
             }
         }

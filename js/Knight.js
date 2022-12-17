@@ -1,8 +1,8 @@
-import { COLOUR } from './constants.js';
+import { COLOR } from './constants.js';
 import Piece from './Piece.js';
 export default class Knight extends Piece {
-    constructor(x, y, colour, sprite) {
-        super(x, y, colour, sprite);
+    constructor(x, y, color, sprite) {
+        super(x, y, color, sprite);
     }
 
 
@@ -23,17 +23,17 @@ export default class Knight extends Piece {
 
     getMove(xDir, yDir, tiles) {
         let newX = this.x + xDir;
-        let newY = this.y + yDir; 
+        let newY = this.y + yDir;
         if (this.isOffBoard(newX, newY)) {
             return;
         }
 
         if (tiles[newX][newY]) {
-            if (tiles[newX][newY].colour !== this.colour) {
-                return {x : newX, y: newY};         
+            if (tiles[newX][newY].color !== this.color) {
+                return { x: newX, y: newY };
             }
         } else {
-            return  {x : newX, y: newY};
+            return { x: newX, y: newY };
         }
     }
 }

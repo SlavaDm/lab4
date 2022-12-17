@@ -1,8 +1,8 @@
-import { COLOUR } from './constants.js';
+import { COLOR } from './constants.js';
 import Piece from './Piece.js';
 export default class Queen extends Piece {
-    constructor(x, y, colour, sprite) {
-        super(x, y, colour, sprite);
+    constructor(x, y, color, sprite) {
+        super(x, y, color, sprite);
     }
 
 
@@ -30,12 +30,12 @@ export default class Queen extends Piece {
             }
 
             if (tiles[newX][newY]) {
-                if (tiles[newX][newY].colour !== this.colour) {
-                    moves.push({x : newX, y: newY});         
+                if (tiles[newX][newY].color !== this.color) {
+                    moves.push({ x: newX, y: newY });
                 }
                 return moves;
             }
-            moves.push({x : newX, y: newY});
+            moves.push({ x: newX, y: newY });
         }
         return moves;
     }

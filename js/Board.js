@@ -1,5 +1,5 @@
 import Bishop from './Bishop.js';
-import { COLOUR, SIZE } from './constants.js';
+import { COLOR, SIZE } from './constants.js';
 import Pawn from './Pawn.js';
 import Rook from './Rook.js';
 import Knight from './Knight.js';
@@ -12,7 +12,7 @@ export default class Board {
     constructor() {
         this.sizeOfSquare = SIZE / 8;
         this.tiles = this.createTiles();
-        this.turn = COLOUR.WHITE;
+        this.turn = COLOR.WHITE;
         this.isInCheck = false;
     }
 
@@ -20,31 +20,31 @@ export default class Board {
         let tiles = this.createEmptyBoard();
 
         for (let i = 0; i < 8; i++) {
-            tiles[i][1] = new Pawn(i, 1, COLOUR.BLACK, '♟');
-            tiles[i][6] = new Pawn(i, 6, COLOUR.WHITE, '♙');
+            tiles[i][1] = new Pawn(i, 1, COLOR.BLACK, '♟');
+            tiles[i][6] = new Pawn(i, 6, COLOR.WHITE, '♙');
         }
 
-        tiles[0][0] = new Rook(0, 0, COLOUR.BLACK, '♜');
-        tiles[7][0] = new Rook(7, 0, COLOUR.BLACK, '♜');
-        tiles[0][7] = new Rook(0, 7, COLOUR.WHITE, '♖');
-        tiles[7][7] = new Rook(7, 7, COLOUR.WHITE, '♖');
+        tiles[0][0] = new Rook(0, 0, COLOR.BLACK, '♜');
+        tiles[7][0] = new Rook(7, 0, COLOR.BLACK, '♜');
+        tiles[0][7] = new Rook(0, 7, COLOR.WHITE, '♖');
+        tiles[7][7] = new Rook(7, 7, COLOR.WHITE, '♖');
 
-        tiles[2][0] = new Bishop(2, 0, COLOUR.BLACK, '♝');
-        tiles[5][0] = new Bishop(5, 0, COLOUR.BLACK, '♝');
-        tiles[2][7] = new Bishop(2, 7, COLOUR.WHITE, '♗');
-        tiles[5][7] = new Bishop(5, 7, COLOUR.WHITE, '♗');
+        tiles[2][0] = new Bishop(2, 0, COLOR.BLACK, '♝');
+        tiles[5][0] = new Bishop(5, 0, COLOR.BLACK, '♝');
+        tiles[2][7] = new Bishop(2, 7, COLOR.WHITE, '♗');
+        tiles[5][7] = new Bishop(5, 7, COLOR.WHITE, '♗');
 
 
-        tiles[1][0] = new Knight(1, 0, COLOUR.BLACK, '♞');
-        tiles[6][0] = new Knight(6, 0, COLOUR.BLACK, '♞');
-        tiles[1][7] = new Knight(1, 7, COLOUR.WHITE, '♘');
-        tiles[6][7] = new Knight(6, 7, COLOUR.WHITE, '♘');
+        tiles[1][0] = new Knight(1, 0, COLOR.BLACK, '♞');
+        tiles[6][0] = new Knight(6, 0, COLOR.BLACK, '♞');
+        tiles[1][7] = new Knight(1, 7, COLOR.WHITE, '♘');
+        tiles[6][7] = new Knight(6, 7, COLOR.WHITE, '♘');
 
-        tiles[4][0] = new King(4, 0, COLOUR.BLACK, '♚');
-        tiles[4][7] = new King(4, 7, COLOUR.WHITE, '♔');
+        tiles[4][0] = new King(4, 0, COLOR.BLACK, '♚');
+        tiles[4][7] = new King(4, 7, COLOR.WHITE, '♔');
 
-        tiles[3][0] = new Queen(3, 0, COLOUR.BLACK, '♛');
-        tiles[3][7] = new Queen(3, 7, COLOUR.WHITE, '♕');
+        tiles[3][0] = new Queen(3, 0, COLOR.BLACK, '♛');
+        tiles[3][7] = new Queen(3, 7, COLOR.WHITE, '♕');
 
         return tiles;
     }
@@ -119,7 +119,7 @@ export default class Board {
     select(x, y) {
         if (this.isOffBoard(x, y)) {
             this.selected = null;
-        } else if (this.tiles[x][y] && this.tiles[x][y].colour === this.turn) {
+        } else if (this.tiles[x][y] && this.tiles[x][y].color === this.turn) {
             this.selected = JSON.parse(JSON.stringify(this.tiles[x][y]));
             this.legalMoves = this.tiles[this.selected.x][this.selected.y].findLegalMoves(this.tiles);
         } else if (this.selected) {
@@ -133,7 +133,7 @@ export default class Board {
     }
 
     move(from, to) {
-        this.turn = this.turn === COLOUR.WHITE ? COLOUR.BLACK : COLOUR.WHITE;
+        this.turn = this.turn === COLOR.WHITE ? COLOR.BLACK : COLOR.WHITE;
         this.tiles[from.x][from.y].userMove(to.x, to.y, this.tiles);
         this.selected = null;
 

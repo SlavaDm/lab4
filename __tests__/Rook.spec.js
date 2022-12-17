@@ -1,6 +1,6 @@
 
 import Board from '../js/Board.js';
-import { COLOUR } from '../js/constants.js';
+import { COLOR } from '../js/constants.js';
 import Knight from '../js/Knight.js';
 import Pawn from '../js/Pawn.js';
 import Rook from '../js/Rook.js';
@@ -13,7 +13,7 @@ describe('Move', () => {
     });
 
     test('Should move', () => {
-        const rook = new Rook(0, 5, COLOUR.WHITE);
+        const rook = new Rook(0, 5, COLOR.WHITE);
 
         let hasError = false
 
@@ -29,7 +29,7 @@ describe('Move', () => {
     });
 
     test('Should move', () => {
-        const rook = new Rook(3, 4, COLOUR.WHITE);
+        const rook = new Rook(3, 4, COLOR.WHITE);
 
         let hasError = false
 
@@ -53,7 +53,7 @@ describe('Move wrong', () => {
     });
 
     test('Should not move', () => {
-        const rook = new Rook(0, 7, COLOUR.WHITE);
+        const rook = new Rook(0, 7, COLOR.WHITE);
 
         let hasError = false
 
@@ -69,7 +69,7 @@ describe('Move wrong', () => {
     });
 
     test('Should not move', () => {
-        const rook = new Rook(0, 7, COLOUR.WHITE);
+        const rook = new Rook(0, 7, COLOR.WHITE);
 
         let hasError = false
 
@@ -101,12 +101,12 @@ describe('Finding moves', () => {
     });
 
     test('Should find 11 legal moves when blocked by black pawn so can go back and go right', () => {
-        tiles[0][2] = new Rook(0, 2, COLOUR.WHITE);
+        tiles[0][2] = new Rook(0, 2, COLOR.WHITE);
         expect(tiles[0][2].findMoves(tiles).length).toBe(11);
     });
 
     test('Should find one attacking move if the pawn in front is enemy', () => {
-        tiles[0][6].colour = COLOUR.BLACK;
+        tiles[0][6].color = COLOR.BLACK;
         expect(tiles[0][7].findBackwardMoves(tiles).length).toBe(1);
     });
 });
@@ -119,9 +119,9 @@ describe('Attacking moves', () => {
     });
 
     test('Should find two attacking moves if trapped in the top-left corner by two enemy pieces', () => {
-        const rook = new Rook(0, 0, COLOUR.WHITE);
-        const enemyPawn = new Pawn(0, 1, COLOUR.BLACK);
-        const enemyKnight = new Knight(1, 0, COLOUR.BLACK);
+        const rook = new Rook(0, 0, COLOR.WHITE);
+        const enemyPawn = new Pawn(0, 1, COLOR.BLACK);
+        const enemyKnight = new Knight(1, 0, COLOR.BLACK);
 
         tiles[0][0] = rook;
         tiles[0][1] = enemyPawn;
@@ -131,9 +131,9 @@ describe('Attacking moves', () => {
     });
 
     test('Should find two attacking moves if trapped in the top-right corner by two enemy pieces', () => {
-        const rook = new Rook(0, 7, COLOUR.WHITE);
-        const enemyPawn = new Pawn(0, 6, COLOUR.BLACK);
-        const enemyKnight = new Knight(1, 7, COLOUR.BLACK);
+        const rook = new Rook(0, 7, COLOR.WHITE);
+        const enemyPawn = new Pawn(0, 6, COLOR.BLACK);
+        const enemyKnight = new Knight(1, 7, COLOR.BLACK);
 
         tiles[0][7] = rook;
         tiles[0][6] = enemyPawn;

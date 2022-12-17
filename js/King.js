@@ -1,10 +1,10 @@
 import CheckFinder from './CheckFinder.js';
-import { COLOUR } from './constants.js';
+import { COLOR } from './constants.js';
 import Piece from './Piece.js';
 import Rook from './Rook.js';
 export default class King extends Piece {
-    constructor(x, y, colour, sprite) {
-        super(x, y, colour, sprite);
+    constructor(x, y, color, sprite) {
+        super(x, y, color, sprite);
         this.type = 'king';
     }
 
@@ -34,7 +34,7 @@ export default class King extends Piece {
         }
 
         if (tiles[newX][newY]) {
-            if (tiles[newX][newY].colour !== this.colour) {
+            if (tiles[newX][newY].color !== this.color) {
                 return { x: newX, y: newY };
             }
         } else {
@@ -103,13 +103,13 @@ export default class King extends Piece {
     // special case where castling is not allowed when checked
     findLegalMoves(tiles) {
         const legalMoves = super.findLegalMoves(tiles);
-        for (let i = legalMoves.length -1; i >= 0; i--) {
+        for (let i = legalMoves.length - 1; i >= 0; i--) {
             const currentMove = legalMoves[i];
             if (currentMove.x == this.x - 2 || currentMove.x == this.x + 2) {
-                if (CheckFinder.isCurrentPlayerInCheck(tiles, this.colour)) {
+                if (CheckFinder.isCurrentPlayerInCheck(tiles, this.color)) {
                     legalMoves.splice(i, 1);
                 }
-            } 
+            }
         }
         return legalMoves;
     }
